@@ -568,6 +568,32 @@ public class Main {
 ## 工厂模式
 工厂模式是一种创建型设计模式，它提供了一种创建对象的最佳方式。在工厂模式中，我们不会对客户端暴露对象创建的逻辑，并且是通过一个共同的接口来指向新创建的对象。
 > 为什么不直接new呢？
+
 我们想一下，如果我们在程序中直接new一个对象，那么我们就需要知道这个对象的具体实现类，这样就会导致我们的代码与具体实现类耦合，这样就会导致我们的代码不够灵活，如果我们想要替换这个实现类(比如类名被修改)，那么我们就需要修改代码(大量修改)，这样就违背了开闭原则。
 而通过工厂模式，我们只需要知道这个对象的接口，而不需要知道具体的实现类，这样就可以很好的解耦，我们只需要修改工厂类就可以了。
 
+>水果工厂
+
+```java
+public abstract class FruitFactory<T extends Fruit> {
+    public abstract T getFruit();
+}
+```
+
+>苹果工厂
+
+```java
+/**
+ * @author: blkcor
+ * @DATE: 2022/9/26  13:26
+ * @PROJECT_NAME: partern-design-java
+ * @since: jdk1.8
+ */
+public class AppleFactory extends FruitFactory<Apple> {
+    @Override
+    public  Apple getFruit() {
+        return new Apple();
+    }
+}
+
+```
