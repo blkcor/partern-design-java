@@ -589,11 +589,20 @@ public abstract class FruitFactory<T extends Fruit> {
  * @PROJECT_NAME: partern-design-java
  * @since: jdk1.8
  */
-public class AppleFactory extends FruitFactory<Apple> {
+public class AppleFactory extends FruitFactory<Apple_Company> {
     @Override
-    public  Apple getFruit() {
-        return new Apple();
+    public Apple_Company getFruit() {
+        return new Apple_Company();
     }
 }
 
 ```
+
+## 抽象工厂模式
+抽象工厂模式是一种创建型设计模式，它能够提供一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体类。
+在前面的简单工厂模式中，我们只能创建一个对象，而抽象工厂模式可以创建一组对象，这些对象是相关的，或者是依赖的。
+简而言之，抽象工厂模式就是工厂方法模式的升级版，它可以创建一组对象，而不是一个对象。
+就像这样：
+![img.png](https://raw.githubusercontent.com/blkcor/picture-repo/master/Snipaste_2022-09-27_11-52-53.png)
+
+但是这样会带来问题，比如我们现在要增加一个橘子工厂，那么我们就需要修改抽象工厂类，这样就违背了开闭原则。

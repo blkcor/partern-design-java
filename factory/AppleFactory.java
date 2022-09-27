@@ -4,10 +4,10 @@
  * @PROJECT_NAME: partern-design-java
  * @since: jdk1.8
  */
-public class AppleFactory extends FruitFactory<Apple> {
+public class AppleFactory extends FruitFactory<Apple_Company> {
     @Override
-    public  Apple getFruit() {
-        return new Apple();
+    public Apple_Company getFruit() {
+        return new Apple_Company();
     }
 }
 
