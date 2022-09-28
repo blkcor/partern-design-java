@@ -606,3 +606,86 @@ public class AppleFactory extends FruitFactory<Apple_Company> {
 ![img.png](./images/Snipaste_2022-09-27_11-52-53.png)
 
 但是这样会带来问题，比如我们现在要增加一个橘子工厂，那么我们就需要修改抽象工厂类，这样就违背了开闭原则。
+
+
+## 建造者模式
+建造者模式是一种创建型设计模式，它能够将一个产品的内部表象与产品的生成过程分割开来，从而可以使一个建造过程生成具有不同的内部表象的产品对象。
+> 为什么要使用建造者模式？
+> 产品的内部表象是复杂的，比如一个人，一个人有很多属性，比如姓名，年龄，性别，身高，体重等等，如果我们直接new一个对象，那么我们就需要知道这个对象的所有属性，这样就会导致我们的代码与具体实现类耦合，这样就会导致我们的代码不够灵活，如果我们想要替换这个实现类(比如类名被修改)，那么我们就需要修改代码(大量修改)，这样就违背了开闭原则。
+```java
+import lombok.ToString;
+
+import java.util.List;
+
+@ToString
+public class Student {
+
+    private Integer id;
+    private String name;
+    private String college;
+    private String major;
+    private String grade;
+    private List<String> awards;
+
+    private Student(StudentBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.college = builder.college;
+        this.major = builder.major;
+        this.grade = builder.grade;
+        this.awards = builder.awards;
+    }
+
+    public static StudentBuilder builder() {
+        return new StudentBuilder();
+    }
+
+
+    public static class StudentBuilder {
+        private Integer id;
+        private String name;
+        private String college;
+        private String major;
+        private String grade;
+        private List<String> awards;
+
+        public StudentBuilder id(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public StudentBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public StudentBuilder college(String college) {
+            this.college = college;
+            return this;
+        }
+
+        public StudentBuilder major(String major) {
+            this.major = major;
+            return this;
+        }
+
+        public StudentBuilder grade(String grade) {
+            this.grade = grade;
+            return this;
+        }
+
+        public StudentBuilder awards(List<String> awards) {
+            this.awards = awards;
+            return this;
+        }
+
+        public Student build() {
+            return new Student(this);
+        }
+    }
+
+}
+
+
+
+```
