@@ -686,6 +686,118 @@ public class Student {
 
 }
 
+```
 
+
+
+
+## 单例模式
+单例模式是一种创建型设计模式，它能够保证在应用程序中，一个类只有一个实例存在。
+>懒汉式单例模式
+```java
+public class Singleton_Lazy {
+    /**
+     * 懒汉式单例 线程不安全
+     * 为什么线程不安全？
+     * 因为在多线程的情况下，可能会有多个线程同时进入if判断，然后同时new出来多个实例
+     * 如何解决？
+     * 1.加锁 synchronized
+     * 2.双重检查锁
+     * 3.静态内部类
+     * 4.枚举
+     * 5.容器
+     * 6.线程池
+     * 7.线程本地变量
+     * 8.线程安全的集合
+     * 9.线程安全的工具类
+     * 10.线程安全的数据结构
+     * 11.线程安全的算法
+     * 12.线程安全的对象
+     * 13.线程安全的类
+     * 14.线程安全的方法
+     * 15.线程安全的代码块
+     * 16.线程安全的变量
+     */
+    private static Singleton_Lazy singleton;
+
+    private Singleton_Lazy() {
+    }
+
+    public static Singleton_Lazy getInstance() {
+        if (singleton == null) {
+            singleton = new Singleton_Lazy();
+        }
+        return singleton;
+    }
+}
+
+```
+>解决懒汉式单例模式线程不安全的问题
+> 1.加锁 synchronized
+```java
+public static synchronized Singleton_Lazy getInstance() {
+        if (singleton == null) {
+        singleton = new Singleton_Lazy();
+        }
+        return singleton;
+        }
+```
+
+> 2.双重检查锁 提升性能
+```java
+public static  Singleton_Lazy getInstance() {
+        if (singleton == null) {
+            synchronized (Singleton_Lazy.class) {
+                if (singleton == null) {
+                    singleton = new Singleton_Lazy();
+                }
+            }
+        }
+        return singleton;
+    }
+```
+
+>3、添加volatile关键字 保证线程可见性
+```java
+private volatile static Singleton_Lazy singleton;
+```
+**这样差不多就完美了!**
+
+>4、静态内部类
+```java
+public class Singleton_StaticInnerClass {
+    /**
+     * 静态内部类
+     */
+    private static class SingletonHolder {
+        private static final Singleton_StaticInnerClass INSTANCE = new Singleton_StaticInnerClass();
+    }
+
+    private Singleton_StaticInnerClass() {
+    }
+
+    public static final Singleton_StaticInnerClass getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+}
+```
+
+
+>饿汉式单例模式
+```java
+
+public class Singleton_Hungry {
+    /**
+     * 饿汉式单例 线程安全  一开始就new出来
+     */
+    private static Singleton_Hungry singleton = new Singleton_Hungry();
+
+    private Singleton_Hungry() {
+    }
+
+    public static Singleton_Hungry getInstance() {
+        return singleton;
+    }
+}
 
 ```

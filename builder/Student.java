@@ -40,6 +40,7 @@ public class Student {
         private String grade;
         private List<String> awards;
 
+        //柯里化 链式调用
         public StudentBuilder id(Integer id) {
             this.id = id;
             return this;

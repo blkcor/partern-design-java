@@ -16,7 +16,6 @@ public class BuilderTest {
                 .grade("大三")
                 .awards(Arrays.asList("一等奖", "二等奖"))
                 .build();
-
         System.out.println(student.toString());
     }
 }
