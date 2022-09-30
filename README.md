@@ -799,3 +799,36 @@ public class Singleton_Hungry {
 }
 
 ```
+
+## 原型模式
+原型模式是一种创建型设计模式，它能够通过复制现有对象来生成新对象，而无需知道如何创建对象的细节。
+```java
+import lombok.Data;
+
+import java.util.List;
+
+/**
+ * 原型模式
+ */
+@Data
+public class Student_Proto implements Cloneable {
+    private String name;
+
+
+    public Student_Proto() {
+    }
+
+    public Student_Proto(String name) {
+        this.name = name;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        //Object本身提供的clone 是浅拷贝 只拷贝基本类型 我们需要深拷贝
+        Student_Proto clone = (Student_Proto) super.clone();
+        clone.setName(this.name);
+        return clone;
+    }
+}
+
+```
