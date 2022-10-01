@@ -517,11 +517,11 @@ class B {
 public class Main {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost", 8080);   //假设我们当前的程序需要进行网络通信
-        Test test = new Test();
+        TestAdapter test = new TestAdapter();
         test.test(socket);   //现在需要执行test方法来做一些事情
     }
 
-    static class Test {
+    static class TestAdapter {
         /**
          * 比如test方法需要得到我们当前Socket连接的本地地址
          */
@@ -545,11 +545,11 @@ public class Main {
 public class Main {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost", 8080);
-        Test test = new Test();
+        TestAdapter test = new TestAdapter();
         test.test(socket.getLocalAddress().getHostAddress());  //在外面解析好就行了
     }
 
-    static class Test {
+    static class TestAdapter {
         public void test(String str) {   //一个字符串就能搞定，就没必要丢整个对象进来
             System.out.println("IP地址：" + str);
         }
@@ -832,3 +832,24 @@ public class Student_Proto implements Cloneable {
 }
 
 ```
+
+
+## 适配器模式
+适配器模式是一种结构型设计模式，它能将不兼容的对象包装起来以改变其接口。
+>精髓：理解为拓展坞或者转接头，应该在两个不兼容的接口之间起到中间的转换作用，使得原本由于接口不兼容而不能一起工作的两个类可以一起工作。即在两端工作。
+```java 
+/**
+ * @author: blkcor
+ * @DATE: 2022/10/1  9:54
+ * @PROJECT_NAME: partern-design-java
+ * @since: jdk1.8
+ */
+public class SupplyAdapter extends TestSupplier implements Target {
+    @Override
+    public String supply() {
+        return super.doSupply();
+    }
+}
+
+```
+
